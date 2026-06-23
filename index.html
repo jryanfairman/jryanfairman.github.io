@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jack Ryan Fairman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;
+    background:#fff;color:#111;
+    padding:24px;
+  }
+  h1{
+    font-size:18px;font-weight:700;
+    margin-bottom:24px;
+  }
+
+  /* the mosaic */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:0;
+  }
+  .grid img{
+    width:100%;
+    aspect-ratio:3/2;       /* uniform landscape tiles */
+    object-fit:cover;       /* thumbnail crops; full image shows uncropped */
+    display:block;
+    cursor:pointer;
+    background:#eee;
+  }
+
+  /* full-screen overlay */
+  .overlay{
+    position:fixed;inset:0;
+    background:transparent;
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:100;
+  }
+  .overlay.open{display:flex}
+  .box{
+    display:flex;flex-direction:column;
+    max-width:94vw;
+  }
+  .overlay img{
+    max-width:100%;max-height:86vh;
+    object-fit:contain;
+    cursor:pointer;
+  }
+  .cap{
+    margin-top:14px;
+    font-size:13px;color:#111;
+    text-align:left;
+    display:none;
+  }
+  footer{
+    margin-top:24px;
+    font-size:13px;
+  }
+  footer a{color:#111;text-decoration:none;border-bottom:1px solid #ccc}
+  footer a:hover{border-color:#111}
+</style>
+</head>
+<body>
+
+  <h1>Jack Ryan Fairman</h1>
+
+  <div class="grid" id="grid">
+    <!-- Real use: src=thumbnail, data-full=full-size file, data-title=optional title (leave "" for none) -->
+    <img src="thumbs/001.jpg" data-full="full/001.jpg" data-title="001.jpg" alt="">
+    <img src="thumbs/002.jpg" data-full="full/002.jpg" data-title="002.jpg" alt="">
+    <img src="thumbs/003.jpg" data-full="full/003.jpg" data-title="003.jpg" alt="">
+    <img src="thumbs/004.jpg" data-full="full/004.jpg" data-title="004.jpg" alt="">
+    <img src="thumbs/005.jpg" data-full="full/005.jpg" data-title="005.jpg" alt="">
+    <img src="thumbs/007.jpg" data-full="full/007.jpg" data-title="007.jpg" alt="">
+    <img src="thumbs/008.jpg" data-full="full/008.jpg" data-title="008.jpg" alt="">
+    <img src="thumbs/009.jpg" data-full="full/009.jpg" data-title="009.jpg" alt="">
+    <img src="thumbs/010.jpg" data-full="full/010.jpg" data-title="010.jpg" alt="">
+    <img src="thumbs/011.jpg" data-full="full/011.jpg" data-title="011.jpg" alt="">
+    <img src="thumbs/012.jpg" data-full="full/012.jpg" data-title="012.jpg" alt="">
+    <img src="thumbs/013.jpg" data-full="full/013.jpg" data-title="013.jpg" alt="">
+    <img src="thumbs/014.jpg" data-full="full/014.jpg" data-title="014.jpg" alt="">
+    <img src="thumbs/015.jpg" data-full="full/015.jpg" data-title="015.jpg" alt="">
+    <img src="thumbs/016.jpg" data-full="full/016.jpg" data-title="016.jpg" alt="">
+    <img src="thumbs/017.jpg" data-full="full/017.jpg" data-title="017.jpg" alt="">
+    <img src="thumbs/019.jpg" data-full="full/019.jpg" data-title="019.jpg" alt="">
+    <img src="thumbs/021.jpg" data-full="full/021.jpg" data-title="021.jpg" alt="">
+    <img src="thumbs/022.jpg" data-full="full/022.jpg" data-title="022.jpg" alt="">
+    <img src="thumbs/023.jpg" data-full="full/023.jpg" data-title="023.jpg" alt="">
+    <img src="thumbs/024.jpg" data-full="full/024.jpg" data-title="024.jpg" alt="">
+    <img src="thumbs/030.jpg" data-full="full/030.jpg" data-title="030.jpg" alt="">
+    <img src="thumbs/032.jpg" data-full="full/032.jpg" data-title="032.jpg" alt="">
+    <img src="thumbs/033.jpg" data-full="full/033.jpg" data-title="033.jpg" alt="">
+    <img src="thumbs/039.jpg" data-full="full/039.jpg" data-title="039.jpg" alt="">
+    <img src="thumbs/040.jpg" data-full="full/040.jpg" data-title="040.jpg" alt="">
+    <img src="thumbs/041.jpg" data-full="full/041.jpg" data-title="041.jpg" alt="">
+    <img src="thumbs/044.jpg" data-full="full/044.jpg" data-title="044.jpg" alt="">
+    <img src="thumbs/045.jpg" data-full="full/045.jpg" data-title="045.jpg" alt="">
+    <img src="thumbs/046.jpg" data-full="full/046.jpg" data-title="046.jpg" alt="">
+    <img src="thumbs/047.jpg" data-full="full/047.jpg" data-title="047.jpg" alt="">
+    <img src="thumbs/048.jpg" data-full="full/048.jpg" data-title="048.jpg" alt="">
+    <img src="thumbs/049.jpg" data-full="full/049.jpg" data-title="049.jpg" alt="">
+    <img src="thumbs/053.jpg" data-full="full/053.jpg" data-title="053.jpg" alt="">
+    <img src="thumbs/059.jpg" data-full="full/059.jpg" data-title="059.jpg" alt="">
+    <img src="thumbs/244.jpg" data-full="full/244.jpg" data-title="244.jpg" alt="">
+    <img src="thumbs/063.jpg" data-full="full/063.jpg" data-title="063.jpg" alt="">
+    <img src="thumbs/065.jpg" data-full="full/065.jpg" data-title="065.jpg" alt="">
+    <img src="thumbs/066.jpg" data-full="full/066.jpg" data-title="066.jpg" alt="">
+    <img src="thumbs/067.jpg" data-full="full/067.jpg" data-title="067.jpg" alt="">
+    <img src="thumbs/068.jpg" data-full="full/068.jpg" data-title="068.jpg" alt="">
+    <img src="thumbs/069.jpg" data-full="full/069.jpg" data-title="069.jpg" alt="">
+    <img src="thumbs/075.jpg" data-full="full/075.jpg" data-title="075.jpg" alt="">
+    <img src="thumbs/076.jpg" data-full="full/076.jpg" data-title="076.jpg" alt="">
+    <img src="thumbs/077.jpg" data-full="full/077.jpg" data-title="077.jpg" alt="">
+    <img src="thumbs/192.jpg" data-full="full/192.jpg" data-title="192.jpg" alt="">
+    <img src="thumbs/194.jpg" data-full="full/194.jpg" data-title="194.jpg" alt="">
+    <img src="thumbs/195.jpg" data-full="full/195.jpg" data-title="195.jpg" alt="">
+    <img src="thumbs/196.jpg" data-full="full/196.jpg" data-title="196.jpg" alt="">
+    <img src="thumbs/197.jpg" data-full="full/197.jpg" data-title="197.jpg" alt="">
+    <img src="thumbs/080.jpg" data-full="full/080.jpg" data-title="080.jpg" alt="">
+    <img src="thumbs/084.jpg" data-full="full/084.jpg" data-title="084.jpg" alt="">
+    <img src="thumbs/094.jpg" data-full="full/094.jpg" data-title="094.jpg" alt="">
+    <img src="thumbs/258.jpg" data-full="full/258.jpg" data-title="" alt="">
+    <img src="thumbs/246.jpg" data-full="full/246.jpg" data-title="246.jpg" alt="">
+    <img src="thumbs/098.jpg" data-full="full/098.jpg" data-title="098.jpg" alt="">
+    <img src="thumbs/099.jpg" data-full="full/099.jpg" data-title="099.jpg" alt="">
+    <img src="thumbs/100.jpg" data-full="full/100.jpg" data-title="100.jpg" alt="">
+    <img src="thumbs/101.jpg" data-full="full/101.jpg" data-title="101.jpg" alt="">
+    <img src="thumbs/103.jpg" data-full="full/103.jpg" data-title="103.jpg" alt="">
+    <img src="thumbs/104.jpg" data-full="full/104.jpg" data-title="104.jpg" alt="">
+    <img src="thumbs/105.jpg" data-full="full/105.jpg" data-title="105.jpg" alt="">
+    <img src="thumbs/106.jpg" data-full="full/106.jpg" data-title="106.jpg" alt="">
+    <img src="thumbs/254.jpg" data-full="full/254.jpg" data-title="254.jpg" alt="">
+    <img src="thumbs/108.jpg" data-full="full/108.jpg" data-title="108.jpg" alt="">
+    <img src="thumbs/109.jpg" data-full="full/109.jpg" data-title="109.jpg" alt="">
+    <img src="thumbs/114.jpg" data-full="full/114.jpg" data-title="114.jpg" alt="">
+    <img src="thumbs/115.jpg" data-full="full/115.jpg" data-title="115.jpg" alt="">
+    <img src="thumbs/118.jpg" data-full="full/118.jpg" data-title="118.jpg" alt="">
+    <img src="thumbs/119.jpg" data-full="full/119.jpg" data-title="119.jpg" alt="">
+    <img src="thumbs/247.jpg" data-full="full/247.jpg" data-title="247.jpg" alt="">
+    <img src="thumbs/249.jpg" data-full="full/249.jpg" data-title="249.jpg" alt="">
+    <img src="thumbs/251.jpg" data-full="full/251.jpg" data-title="251.jpg" alt="">
+    <img src="thumbs/252.jpg" data-full="full/252.jpg" data-title="252.jpg" alt="">
+    <img src="thumbs/250.jpg" data-full="full/250.jpg" data-title="250.jpg" alt="">
+    <img src="thumbs/127.jpg" data-full="full/127.jpg" data-title="127.jpg" alt="">
+    <img src="thumbs/128.jpg" data-full="full/128.jpg" data-title="128.jpg" alt="">
+    <img src="thumbs/172.jpg" data-full="full/172.jpg" data-title="172.jpg" alt="">
+    <img src="thumbs/129.jpg" data-full="full/129.jpg" data-title="129.jpg" alt="">
+    <img src="thumbs/248.jpg" data-full="full/248.jpg" data-title="248.jpg" alt="">
+    <img src="thumbs/131.jpg" data-full="full/131.jpg" data-title="131.jpg" alt="">
+    <img src="thumbs/253.jpg" data-full="full/253.jpg" data-title="253.jpg" alt="">
+    <img src="thumbs/147.jpg" data-full="full/147.jpg" data-title="147.jpg" alt="">
+    <img src="thumbs/149.jpg" data-full="full/149.jpg" data-title="149.jpg" alt="">
+    <img src="thumbs/151.jpg" data-full="full/151.jpg" data-title="151.jpg" alt="">
+    <img src="thumbs/152.jpg" data-full="full/152.jpg" data-title="152.jpg" alt="">
+    <img src="thumbs/154.jpg" data-full="full/154.jpg" data-title="154.jpg" alt="">
+    <img src="thumbs/156.jpg" data-full="full/156.jpg" data-title="156.jpg" alt="">
+    <img src="thumbs/159.jpg" data-full="full/159.jpg" data-title="159.jpg" alt="">
+    <img src="thumbs/255.jpg" data-full="full/255.jpg" data-title="255.jpg" alt="">
+    <img src="thumbs/163.jpg" data-full="full/163.jpg" data-title="163.jpg" alt="">
+    <img src="thumbs/164.jpg" data-full="full/164.jpg" data-title="164.jpg" alt="">
+    <img src="thumbs/235.jpg" data-full="full/235.jpg" data-title="235.jpg" alt="">
+    <img src="thumbs/166.jpg" data-full="full/166.jpg" data-title="166.jpg" alt="">
+    <img src="thumbs/168.jpg" data-full="full/168.jpg" data-title="168.jpg" alt="">
+    <img src="thumbs/169.jpg" data-full="full/169.jpg" data-title="169.jpg" alt="">
+    <img src="thumbs/170.jpg" data-full="full/170.jpg" data-title="170.jpg" alt="">
+    <img src="thumbs/176.jpg" data-full="full/176.jpg" data-title="176.jpg" alt="">
+    <img src="thumbs/178.jpg" data-full="full/178.jpg" data-title="178.jpg" alt="">
+    <img src="thumbs/180.jpg" data-full="full/180.jpg" data-title="180.jpg" alt="">
+    <img src="thumbs/185.jpg" data-full="full/185.jpg" data-title="185.jpg" alt="">
+    <img src="thumbs/187.jpg" data-full="full/187.jpg" data-title="187.jpg" alt="">
+    <img src="thumbs/256.jpg" data-full="full/256.jpg" data-title="256.jpg" alt="">
+    <img src="thumbs/200.jpg" data-full="full/200.jpg" data-title="200.jpg" alt="">
+    <img src="thumbs/201.jpg" data-full="full/201.jpg" data-title="201.jpg" alt="">
+    <img src="thumbs/202.jpg" data-full="full/202.jpg" data-title="202.jpg" alt="">
+    <img src="thumbs/203.jpg" data-full="full/203.jpg" data-title="203.jpg" alt="">
+    <img src="thumbs/204.jpg" data-full="full/204.jpg" data-title="204.jpg" alt="">
+    <img src="thumbs/208.jpg" data-full="full/208.jpg" data-title="208.jpg" alt="">
+    <img src="thumbs/209.jpg" data-full="full/209.jpg" data-title="209.jpg" alt="">
+    <img src="thumbs/210.jpg" data-full="full/210.jpg" data-title="210.jpg" alt="">
+    <img src="thumbs/211.jpg" data-full="full/211.jpg" data-title="211.jpg" alt="">
+    <img src="thumbs/134.jpg" data-full="full/134.jpg" data-title="134.jpg" alt="">
+    <img src="thumbs/212.jpg" data-full="full/212.jpg" data-title="212.jpg" alt="">
+    <img src="thumbs/224.jpg" data-full="full/224.jpg" data-title="224.jpg" alt="">
+    <img src="thumbs/213.jpg" data-full="full/213.jpg" data-title="213.jpg" alt="">
+    <img src="thumbs/214.jpg" data-full="full/214.jpg" data-title="214.jpg" alt="">
+    <img src="thumbs/215.jpg" data-full="full/215.jpg" data-title="215.jpg" alt="">
+    <img src="thumbs/216.jpg" data-full="full/216.jpg" data-title="216.jpg" alt="">
+    <img src="thumbs/222.jpg" data-full="full/222.jpg" data-title="222.jpg" alt="">
+    <img src="thumbs/236.jpg" data-full="full/236.jpg" data-title="236.jpg" alt="">
+    <img src="thumbs/237.jpg" data-full="full/237.jpg" data-title="237.jpg" alt="">
+    <img src="thumbs/238.jpg" data-full="full/238.jpg" data-title="238.jpg" alt="">
+    <img src="thumbs/239.jpg" data-full="full/239.jpg" data-title="239.jpg" alt="">
+    <img src="thumbs/240.jpg" data-full="full/240.jpg" data-title="240.jpg" alt="">
+    <img src="thumbs/241.jpg" data-full="full/241.jpg" data-title="241.jpg" alt="">
+    <img src="thumbs/242.jpg" data-full="full/242.jpg" data-title="242.jpg" alt="">
+    <img src="thumbs/226.jpg" data-full="full/226.jpg" data-title="226.jpg" alt="">
+    <img src="thumbs/245.jpg" data-full="full/245.jpg" data-title="245.jpg" alt="">
+    <img src="thumbs/228.jpg" data-full="full/228.jpg" data-title="228.jpg" alt="">
+    <img src="thumbs/257.jpg" data-full="full/257.jpg" data-title="257.jpg" alt="">
+    <img src="thumbs/229.jpg" data-full="full/229.jpg" data-title="229.jpg" alt="">
+    <img src="thumbs/233.jpg" data-full="full/233.jpg" data-title="233.jpg" alt="">
+    <img src="thumbs/234.jpg" data-full="full/234.jpg" data-title="234.jpg" alt="">
+  </div>
+
+  <footer>
+    jryanfairman@outlook.com
+  </footer>
+
+  <div class="overlay" id="overlay">
+    <div class="box">
+      <img id="full" src="" alt="">
+      <div class="cap" id="cap"></div>
+    </div>
+  </div>
+
+<script>
+  const imgs    = [...document.querySelectorAll('#grid img')];
+  const overlay = document.getElementById('overlay');
+  const full    = document.getElementById('full');
+  const cap     = document.getElementById('cap');
+  let i = 0;
+
+function show(n){
+  i = (n + imgs.length) % imgs.length;
+  const src = imgs[i].dataset.full;
+  const title = imgs[i].dataset.title || "";
+  cap.textContent = title;
+  cap.style.display = title ? "block" : "none";
+  const pre = new Image();
+  pre.src = src;
+  pre.decode().catch(()=>{}).then(()=>{
+    full.src = src;
+    overlay.classList.add('open');
+  });
+}
+  function close(){ overlay.classList.remove('open'); }
+
+  imgs.forEach((img,n)=> img.addEventListener('click',()=>show(n)));
+  full.addEventListener('click', e=>{ e.stopPropagation(); show(i+1); });
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', e=>{
+    if(!overlay.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft') show(i-1);
+    if(e.key==='ArrowRight') show(i+1);
+  });
+</script>
+</body>
+</html>
