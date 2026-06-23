@@ -236,24 +236,21 @@ function show(n){
   cap.textContent = title;
   cap.style.display = title ? "block" : "none";
 
-  // decode tiny first, then show overlay (prevents flash of old image)
-  const tinyImg = new Image();
-  tinyImg.src = tiny;
-  tinyImg.decode().catch(()=>{}).then(()=>{
-    full.src = tiny;
-    full.style.filter = "blur(20px)";
-    overlay.classList.add('open');
+  // show blurred tiny immediately — no decode wait
+  full.src = tiny;
+  full.style.filter = "blur(20px)";
+  overlay.classList.add('open');
 
-    // now load the full image; swap in when ready
-    const pre = new Image();
-    pre.src = srcFull;
-    pre.decode().catch(()=>{}).then(()=>{
-      if (imgs[i].dataset.full === srcFull) {
-        full.src = srcFull;
-        full.style.filter = "none";
-      }
-    });
-  });
+  // load the full image in the background, swap when ready
+  const targetIndex = i;
+  const pre = new Image();
+  pre.onload = () => {
+    if (i === targetIndex) {           // user hasn't moved on
+      full.src = srcFull;
+      full.style.filter = "none";
+    }
+  };
+  pre.src = srcFull;
 
   // preload the next one
   const nxt = imgs[(i+1) % imgs.length];
