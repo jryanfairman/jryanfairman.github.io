@@ -236,19 +236,23 @@ function show(n){
   cap.textContent = title;
   cap.style.display = title ? "block" : "none";
 
-  // show blurred tiny immediately
-  full.src = tiny;
-  full.style.filter = "blur(20px)";
-  overlay.classList.add('open');
+  // decode tiny first, then show overlay (prevents flash of old image)
+  const tinyImg = new Image();
+  tinyImg.src = tiny;
+  tinyImg.decode().catch(()=>{}).then(()=>{
+    full.src = tiny;
+    full.style.filter = "blur(20px)";
+    overlay.classList.add('open');
 
-  // load the full image in the background, swap it in when ready
-  const pre = new Image();
-  pre.src = srcFull;
-  pre.decode().catch(()=>{}).then(()=>{
-    if (imgs[i].dataset.full === srcFull) {   // guard against fast clicking
-      full.src = srcFull;
-      full.style.filter = "none";
-    }
+    // now load the full image; swap in when ready
+    const pre = new Image();
+    pre.src = srcFull;
+    pre.decode().catch(()=>{}).then(()=>{
+      if (imgs[i].dataset.full === srcFull) {
+        full.src = srcFull;
+        full.style.filter = "none";
+      }
+    });
   });
 
   // preload the next one
