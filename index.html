@@ -229,30 +229,33 @@
   let i = 0;
 
 function show(n){
+  console.log('1. show() called for index', n);
   i = (n + imgs.length) % imgs.length;
   const tiny = imgs[i].dataset.tiny;
   const srcFull = imgs[i].dataset.full;
+  console.log('2. tiny exists?', !!tiny, 'length:', tiny ? tiny.length : 0);
   const title = imgs[i].dataset.title || "";
   cap.textContent = title;
   cap.style.display = title ? "block" : "none";
 
-  // show blurred tiny immediately — no decode wait
+  console.log('3. setting full.src to tiny');
   full.src = tiny;
   full.style.filter = "blur(20px)";
+  console.log('4. opening overlay');
   overlay.classList.add('open');
+  console.log('5. overlay should now be visible');
 
-  // load the full image in the background, swap when ready
   const targetIndex = i;
   const pre = new Image();
   pre.onload = () => {
-    if (i === targetIndex) {           // user hasn't moved on
+    console.log('6. full image loaded');
+    if (i === targetIndex) {
       full.src = srcFull;
       full.style.filter = "none";
     }
   };
   pre.src = srcFull;
 
-  // preload the next one
   const nxt = imgs[(i+1) % imgs.length];
   if (nxt) new Image().src = nxt.dataset.full;
 }
