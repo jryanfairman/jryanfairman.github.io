@@ -47,11 +47,11 @@
     display:flex;flex-direction:column;
     max-width:94vw;
   }
-  .overlay img{
-    max-width:100%;max-height:86vh;
-    object-fit:contain;
-    cursor:pointer;
-    transition: filter 0.3s ease;
+.overlay img{
+  object-fit: cover;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  background: transparent;
 }
   }
   .cap{
@@ -229,26 +229,32 @@
   let i = 0;
 
 function show(n){
-  console.log('1. show() called for index', n);
   i = (n + imgs.length) % imgs.length;
   const tiny = imgs[i].dataset.tiny;
   const srcFull = imgs[i].dataset.full;
-  console.log('2. tiny exists?', !!tiny, 'length:', tiny ? tiny.length : 0);
   const title = imgs[i].dataset.title || "";
   cap.textContent = title;
   cap.style.display = title ? "block" : "none";
 
-  console.log('3. setting full.src to tiny');
+  // use the thumbnail's natural ratio (already loaded) to size the overlay image
+  const thumb = imgs[i];
+  const ratio = thumb.naturalWidth / thumb.naturalHeight;
+  const maxH = window.innerHeight * 0.86;
+  const maxW = window.innerWidth  * 0.94;
+  let w = maxW, h = w / ratio;
+  if (h > maxH) { h = maxH; w = h * ratio; }
+  full.style.width  = w + "px";
+  full.style.height = h + "px";
+
+  // show blurred tiny at full size immediately
   full.src = tiny;
   full.style.filter = "blur(20px)";
-  console.log('4. opening overlay');
   overlay.classList.add('open');
-  console.log('5. overlay should now be visible');
 
+  // load the full-res in the background, swap when ready
   const targetIndex = i;
   const pre = new Image();
   pre.onload = () => {
-    console.log('6. full image loaded');
     if (i === targetIndex) {
       full.src = srcFull;
       full.style.filter = "none";
@@ -256,6 +262,7 @@ function show(n){
   };
   pre.src = srcFull;
 
+  // preload the next one
   const nxt = imgs[(i+1) % imgs.length];
   if (nxt) new Image().src = nxt.dataset.full;
 }
